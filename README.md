@@ -1,7 +1,11 @@
 Fake-Host 
 ==== 
-Replacing host file in Windows with your own contents
+Replace host file in Windows with your own contents
 
+
+![alt tag](http://176.31.191.12:8080/projects/anim1.gif)
+
+(Yes, it's linux)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 How to run:
 Compile in VS/MonoDevelop, then just run with:
