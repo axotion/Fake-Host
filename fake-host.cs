@@ -42,7 +42,7 @@ class HostChanger : Form
 		exit.Left=30;
 		// create attributes for buttons (like name, event and control)
 
-	        new_rule.Text = "Create new rule";
+	    new_rule.Text = "Create new rule";
 		new_rule.Click += new EventHandler (Button_Rule);
 		Controls.Add (new_rule);
 
@@ -59,7 +59,6 @@ class HostChanger : Form
 		Controls.Add (exit);
 
 
-
 	}
 	//Changing attributes for file "hosts", then write vars
 	private void Button_Rule (object sender, EventArgs e)
@@ -69,7 +68,7 @@ class HostChanger : Form
 		File.SetAttributes ("c:\\windows\\system32\\drivers\\etc\\hosts", FileAttributes.Normal);
 		File.AppendAllText ("c:\\windows\\system32\\drivers\\etc\\hosts", Environment.NewLine + Var.IP + " " + Var.Dest + Environment.NewLine);
 		File.AppendAllText ("c:\\windows\\system32\\drivers\\etc\\hosts", Var.IP + " " + Var.Dest.Remove (0, 4) + Environment.NewLine);
-		MessageBox.Show ("Successfully", Var.VERSION, MessageBoxButtons.OK);
+		MessageBox.Show ("Successfull", Var.VERSION, MessageBoxButtons.OK);
 	}
 	//show the contents of the file
 	private void Button_Show (object sender, EventArgs e)
@@ -84,7 +83,7 @@ class HostChanger : Form
 	private void Button_Fix (object sender, EventArgs e)
 	{
 		File.WriteAllText("c:\\windows\\system32\\drivers\\etc\\hosts", " ");
-		MessageBox.Show ("Successfully");
+		MessageBox.Show ("Successfull");
 	}
 	//   MAIN!
 	public static void Main(string[] args)
@@ -101,15 +100,18 @@ class HostChanger : Form
 				if (args.Length > 1) {
 					Var.IP = args [0];
 					Var.Dest = args [1];
+					File.SetAttributes ("c:\\windows\\system32\\drivers\\etc\\hosts", FileAttributes.Normal);
+					File.AppendAllText ("c:\\windows\\system32\\drivers\\etc\\hosts", Environment.NewLine + Var.IP + " " + Var.Dest + Environment.NewLine);
+					File.AppendAllText ("c:\\windows\\system32\\drivers\\etc\\hosts", Var.IP + " " + Var.Dest.Remove (0, 4) + Environment.NewLine);
+					if (File.ReadAllText ("c:\\windows\\system32\\drivers\\etc\\hosts") != null) {
+						Console.WriteLine ("Successfull");
+					}
 				} else {
 
 					Application.Run(new HostChanger());
 
 				}
-
-
-
-			} else {
+				} else {
 				MessageBox.Show ("You must run it as Adminstrator", Var.VERSION, MessageBoxButtons.OK,MessageBoxIcon.Warning);
 
 			}
