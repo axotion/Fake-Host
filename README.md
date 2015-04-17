@@ -13,5 +13,5 @@ Compile in VS/MonoDevelop, then just run with:
 -CMD with arguments (for example Fake-Host 127.0.0.1 www.google.com)
 
 Requirements:
-.NET 4.x and Windows XP/Vista/7/8.1
+.NET 4.x and Windows XP(don't really know)/Vista/7/8.1
 
