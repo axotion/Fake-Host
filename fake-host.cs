@@ -9,13 +9,16 @@ using System.Drawing;
 struct Var
 {
 	public const string VERSION= "Fake-host Beta";
-	public static string IP = "127.0.0.1";
-	public static string Dest = "www.bbc.com";
+	public static string IP = "";
+	public static string Dest = "";
+	public const string example_IP="127.0.0.1";
+	public const string example_Dest="www.google.com";
 };
 	
 class HostChanger : Form
 {
 	public HostChanger(){
+
 		//Window title bar
 		this.Text = Var.VERSION;
 		//Size of window
@@ -60,21 +63,38 @@ class HostChanger : Form
 
 
 	}
-	//Changing attributes for file "hosts", then write vars
+	//Changing attributes for file "hosts", then write to vars
 	private void Button_Rule (object sender, EventArgs e)
 	{
-		Var.IP = Microsoft.VisualBasic.Interaction.InputBox ("Where redirect? (IP)", Var.VERSION, Var.IP);
-		Var.Dest = Microsoft.VisualBasic.Interaction.InputBox ("Website? (URL)", Var.VERSION, Var.Dest);
+
+		try{	
+			while (Var.IP == "" ){
+				Var.IP = Microsoft.VisualBasic.Interaction.InputBox ("Where redirect? (IP)", Var.VERSION, Var.example_IP);
+			}
+
+			while(Var.Dest == ""){
+				Var.Dest = Microsoft.VisualBasic.Interaction.InputBox ("Website? (URL)", Var.VERSION, Var.example_Dest);
+			}
+
+		}
+		catch(System.ArgumentOutOfRangeException error){
+			MessageBox.Show (error.Message);
+		}
 		File.SetAttributes ("c:\\windows\\system32\\drivers\\etc\\hosts", FileAttributes.Normal);
 		File.AppendAllText ("c:\\windows\\system32\\drivers\\etc\\hosts", Environment.NewLine + Var.IP + " " + Var.Dest + Environment.NewLine);
 		File.AppendAllText ("c:\\windows\\system32\\drivers\\etc\\hosts", Var.IP + " " + Var.Dest.Remove (0, 4) + Environment.NewLine);
+
 		MessageBox.Show ("Successfull", Var.VERSION, MessageBoxButtons.OK);
+		Var.IP="";
+		Var.Dest="";
 	}
 	//show the contents of the file
+
 	private void Button_Show (object sender, EventArgs e)
 	{
-		MessageBox.Show(File.ReadAllText("c:\\windows\\system32\\drivers\\etc\\hosts"));
+	MessageBox.Show(File.ReadAllText("c:\\windows\\system32\\drivers\\etc\\hosts"));
 	}
+
 	private void Button_Close (object sender, EventArgs e)
 	{
 		Application.Exit();
@@ -82,7 +102,7 @@ class HostChanger : Form
 	//overwrite file
 	private void Button_Fix (object sender, EventArgs e)
 	{
-		File.WriteAllText("c:\\windows\\system32\\drivers\\etc\\hosts", " ");
+	    File.WriteAllText("c:\\windows\\system32\\drivers\\etc\\hosts", " ");
 		MessageBox.Show ("Successfull");
 	}
 	//   MAIN!
