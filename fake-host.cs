@@ -42,7 +42,7 @@ class HostChanger : Form
 		exit.Left=30;
 		// create attributes for buttons (like name, event and control)
 
-	    new_rule.Text = "Create new rule to host";
+	        new_rule.Text = "Create new rule";
 		new_rule.Click += new EventHandler (Button_Rule);
 		Controls.Add (new_rule);
 
@@ -57,6 +57,8 @@ class HostChanger : Form
 		exit.Text = "Exit";
 		exit.Click += new EventHandler (Button_Close);
 		Controls.Add (exit);
+
+
 
 	}
 	//Changing attributes for file "hosts", then write vars
@@ -81,7 +83,7 @@ class HostChanger : Form
 	//overwrite file
 	private void Button_Fix (object sender, EventArgs e)
 	{
-		File.WriteAllText("/home/axotion/hosts", " ");
+		File.WriteAllText("c:\\windows\\system32\\drivers\\etc\\hosts", " ");
 		MessageBox.Show ("Successfully");
 	}
 	//   MAIN!
