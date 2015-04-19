@@ -37,16 +37,10 @@ class HostChanger : Form
 		textBox.SetBounds(12, 36, 372, 20);
 		buttonOk.SetBounds(228, 72, 75, 23);
 
-
-		label.AutoSize = true;
-		textBox.Anchor = textBox.Anchor | AnchorStyles.Right;
-		buttonOk.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-
 		//position, size, can't minimize and Maximize
 		form.ClientSize = new Size(396, 107);
 		form.Controls.AddRange(new Control[] { label, textBox, buttonOk });
-		form.ClientSize = new Size(Math.Max(300, label.Right + 10), form.ClientSize.Height);
-		form.FormBorderStyle = FormBorderStyle.FixedDialog;
+		//form.ClientSize = new Size(Math.Max(300, label.Right + 10), form.ClientSize.Height);
 		form.StartPosition = FormStartPosition.CenterScreen;
 		form.MinimizeBox = false;
 		form.MaximizeBox = false;
@@ -62,6 +56,7 @@ class HostChanger : Form
 		//Size of window
 		this.Width=150;
 		this.Height=160;
+		this.StartPosition = FormStartPosition.CenterScreen;
 		// Create new buttons
 		Button new_rule = new Button ();
 		Button show_hosts = new Button ();
@@ -122,9 +117,9 @@ class HostChanger : Form
 			Var.IP="";
 			Var.Dest="";
 		}
-		catch(System.ArgumentOutOfRangeException error){
-		    Var.IP="";
-		    Var.Dest="";
+		catch(System.ArgumentOutOfRangeException){
+			Var.IP="";
+			Var.Dest="";
 		}
 	}
 	//show the contents of the file
@@ -147,7 +142,7 @@ class HostChanger : Form
 	//   MAIN!
 	public static void Main(string[] args)
 	{
-	    //check if run as admin
+		//check if run as admin
 		bool isAdmin;
 		WindowsIdentity identity = WindowsIdentity.GetCurrent();
 		WindowsPrincipal principal = new WindowsPrincipal(identity);
